@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
 <head>
     <th:block th:include="~{fragments/head}"/>
-    <title>Начало • Your blog name! (WsBlog2.0)</title>
+    <title>За мен • Your blog name! (WsBlog2.0)</title>
 </head>
 <body>
 <!-- header start -->
@@ -12,15 +12,8 @@
 </header>
 <!-- header end -->
 <div id="content">
-    <!-- slider start -->
-    <div th:switch="${sliderStatus}">
-        <span th:case="true">
-            <th:block th:include="~{fragments/slider}"/>
-        </span>
-    </div>
-    <!--slider end    -->
     <!-- blog content start -->
-    <th:block th:include="~{fragments/blog-main}"/>
+    <th:block th:include="~{fragments/about-fragm}"/>
     <!-- blog content end -->
     <!-- footer start -->
     <th:block th:include="~{fragments/footer}"/>

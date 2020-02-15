@@ -1,0 +1,40 @@
+<th:block th:fragment>
+    <div class="sidebar-container">
+        <div class="sidebar-logo">
+            Администрация
+        </div>
+        <ul class="sidebar-navigation">
+            <li class="header">Навигация админ-панел</li>
+            <li>
+                <a href="/admin">
+                    <i class="fa fa-home" aria-hidden="true"></i> Начало
+                </a>
+            </li>
+            <li>
+                <a href="admin-personalisation">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i> Персонализиране
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-book" aria-hidden="true"></i> Публикации
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-users" aria-hidden="true"></i> Модератори
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Лична информация
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/logout}">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Изход
+                </a>
+            </li>
+        </ul>
+    </div>
+</th:block>

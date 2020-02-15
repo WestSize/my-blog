@@ -1,0 +1,50 @@
+<th:block th:fragment>
+
+    <!-- footer -->
+    <footer  style="background-color: #2c292f; height: auto;">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-4 text-center text-md-left ">
+
+                    <div class="py-0">
+                        <h3 class="my-4 text-white"><span class="mx-2 font-italic text-success "><span th:text="${blogName}"></span></span></h3>
+
+                        <p class="footer-links font-weight-bold">
+                            <a class="text-white" href="/">Начало</a>
+                            |
+                            <a class="text-white" href="/about">За мен</a>
+                            |
+                            <a class="text-white" href="#">Контакти</a>
+                            |
+                            <a class="text-white" href="#">Портфолио</a>
+                        </p>
+                        <p class="text-light py-4 mb-4">Всички права запазени &copy; 2020 <span th:text="${blogName}"></span> • wsBlogger2.0</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-white text-center text-md-left ">
+                    <div class="py-2 my-4">
+                        <div>
+                            <p class="text-white"> <i class="fa fa-map-marker mx-2 "></i>
+                                <span th:text="${footerText}"></span></p>
+                        </div>
+
+                        <div>
+                            <p><i class="fa fa-envelope  mx-2"></i><a href="mailto:support@eduonix.com">support@eduonix.com</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-white my-4 text-center text-md-left ">
+                    <div class="py-2">
+                        <a href="#"><i><img src="/img/facebook-ico.png" width="32px"/></i></a>
+                        <a href="#"><i><img src="/img/twitter-ico.png" width="32px"/></i></a>
+                        <a href="#"><i><img src="/img/instagram-ico.png" width="44px"/></i></a>
+                        <a href="/admin"><i><img src="/img/admin-panel-ico.png" width="28px" title="Администрация"/></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</th:block>

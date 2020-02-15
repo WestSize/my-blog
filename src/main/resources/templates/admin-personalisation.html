@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <th:block th:include="~{fragments/head}"/>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <title>Администрация - персонализация • Your blog name! (WsBlog2.0)</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <th:block th:include="~{fragments/header-navi}"/>
+</header>
+<!-- header end -->
+<div id="content">
+
+    <!-- admin panel content start -->
+
+    <!-- admin panel navi start -->
+    <th:block th:include="~{fragments/admin-panel-navi}"/>
+    <!-- admin panel navi end -->
+
+    <div class="content-container">
+
+        <div class="container-fluid">
+
+            <!-- Информационен панел start -->
+            <div class="jumbotron" style="border: solid #000 1px; background-color: #d8ff7d!important;">
+                <h1>Персонализация</h1>
+                <p>От тук можете да променяте някои от основните неща по облика на сайта, а именно настройките
+                    на началния слайдшоу панел, както и да добавяте и премахвате странични
+                    менюта.
+                </p>
+                <p>
+                    <a class="btn btn-lg btn-outline-dark" href="/" role="button">Към блога &raquo;</a>
+                </p>
+            </div>
+            <!-- Информационен панел end-->
+            <!-- Slider settings start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <div th:if="${param.slideshowUpdated}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Настройките на слайдоу панела бяха променени.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
+                        $("#alertPopup").slideUp(500);
+                    });
+                </script>
+                <h1>Настройки слайдшоу</h1>
+                <hr>
+                <p>
+                <div class="form-group mx-sm-3 mb-2">
+
+                    <div th:switch="${sliderEnabled}">
+                        <span th:case="true">
+                             <form action="/sliderOnOff" method="post" class="form-inline">
+                                    <div class="form-check-inline">
+                                    <h6>Статус на slideshow панел</h6>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="isSliderEnabled"
+                                                   value="true" checked>Включен
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="isSliderEnabled"
+                                                   value="false">Изключен
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <button class="btn btn-sm btn-success">Изпрати</button>
+                                    </div>
+                             </form>
+                            </span>
+                        <span th:case="false">
+                             <form action="/sliderOnOff" method="post" class="form-inline">
+                                <div class="form-check-inline">
+                                    <h6>Статус на slideshow панел</h6>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="isSliderEnabled"
+                                               value="true">Включен
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="isSliderEnabled"
+                                               value="false" checked>Изключен
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <button class="btn btn-sm btn-success">Изпрати</button>
+                                 </div>
+                             </form>
+                        </span>
+                    </div>
+                </div>
+                </p>
+                <div th:switch="${sliderEnabled}">
+                    <span th:case="true">
+                        <hr>
+                            <h5>Персонализация:</h5>
+                            <th:block th:include="~{fragments/slider}"/>
+                    </span>
+                </div>
+            </div>
+            <!--            Slider settings end-->
+
+        </div>
+    </div>
+    <!-- admin panel content end -->
+
+</div>
+</body>
+</html>

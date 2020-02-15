@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <th:block th:include="~{fragments/head}"/>
+    <title>Вход в системата • Your blog name! (WsBlog2.0)</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <th:block th:include="~{fragments/header-navi}"/>
+</header>
+<!-- header end -->
+<div id="content">
+    <!-- admin panel login start -->
+<hr>
+    <div class="container">
+        <div class="login-container">
+            <div id="output"></div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form name="f" th:action="@{/login}" method="post">
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        Invalid username and password.
+                    </div>
+                    <div th:if="${param.logout}" class="alert alert-success">
+                        You have been logged out.
+                    </div>
+                    <input type="text" placeholder="username" id="username" name="username">
+                    <input type="password" placeholder="password" id="password" name="password">
+                    <button class="btn btn-success btn-block login" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- admin panel login end -->
+
+</div>
+<!-- footer start -->
+<th:block th:include="~{fragments/footer}"/>
+<!-- footer end -->
+</body>
+</html>

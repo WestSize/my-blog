@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <th:block th:include="~{fragments/head}"/>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <title>Администрация - начало • Your blog name! (WsBlog2.0)</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <th:block th:include="~{fragments/header-navi}"/>
+</header>
+<!-- header end -->
+<div id="content">
+
+    <!-- admin panel content start -->
+
+    <!-- admin panel navi start -->
+    <th:block th:include="~{fragments/admin-panel-navi}"/>
+    <!-- admin panel navi end -->
+
+    <div class="content-container">
+
+        <div class="container-fluid">
+
+            <!-- Поздравителен панел start -->
+            <div class="jumbotron" style="border: solid #000 1px; background-color: #d8ff7d!important;">
+                <h1>Администрация</h1>
+                <p>Добре дошли в админ-панела на '<b><span th:text="${blogName}"></span></b>'. От тук можете да
+                    добавяте,редактирате и премахвате
+                    публикации, да променяте обклика на блога, да коригирате името му, връзки и т.н. Ако сте попаднали
+                    тук случайно,
+                    моля незабавно уведомете собственика на блога!! (<span th:text="${blogAuthor}"></span>)
+                </p>
+                <p>
+                    <a class="btn btn-lg btn-outline-dark" href="/" role="button">Към блога &raquo;</a>
+                </p>
+            </div>
+            <!--            Поздравителен панел end-->
+            <!-- Primary info start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <div th:if="${param.nameUpdated}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Името на блога Ви беше променено.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.emptyBlogName}">
+                    <div class="alert alert-danger alert-dismissible fade show" id="alertPopup">
+                        <strong>Грешка!</strong> Не може да изпратите празно име на блога.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </div>
+                <div th:if="${param.authorUpdated}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Името на автора на блога беше променено.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.emptyAuthorName}">
+                    <div class="alert alert-danger alert-dismissible fade show" id="alertPopup">
+                        <strong>Грешка!</strong> Не може да изпратите празно име за автор на блога.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </div>
+                <div th:if="${param.footerUpdated}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Текстът във долната част (footer-а) на сайта беше сменен.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.emptyFooter}">
+                    <div class="alert alert-danger alert-dismissible fade show" id="alertPopup">
+                        <strong>Грешка!</strong> Долната част (footer-а) не може да остане празен.
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    </div>
+                </div>
+
+                <script>
+                    $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
+                        $("#alertPopup").slideUp(500);
+                    });
+                </script>
+                <h1>Основна информация</h1>
+                <hr>
+                <p>
+                <form action="/changeBlogName" method="post" class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <h6 style="margin-right: 15px">Име на блога</h6>
+                        <input style="display: block; width: 450px;" type="text" class="form-control" id="blogName"
+                               name="blogName"
+                               th:placeholder="${blogName}">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Изпрати</button>
+                </form>
+                </p>
+                <hr>
+                <p>
+                <form action="/changeBlogAuthor" method="post" class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <h6 style="margin-right: 15px">Автор на блога</h6>
+                        <input style="display: block; width: 450px;" type="text" class="form-control" id="authorName"
+                               name="authorName"
+                               th:placeholder="${blogAuthor}">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Изпрати</button>
+                </form>
+                </p>
+                <hr>
+                <p>
+                <form action="/changeFooter" method="post">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <h6 style="margin-right: 15px">Текст във footer-а на сайта</h6>
+                        <textarea style="resize: none;" cols="50" rows="3" class="form-control" id="footerText"
+                                  name="footerText"
+                                  th:placeholder="${footerText}"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2" style="margin-left: 17px;">Изпрати</button>
+                </form>
+                </p>
+            </div>
+            <!--            Primary info end-->
+
+        </div>
+    </div>
+    <!-- admin panel content end -->
+
+</div>
+</body>
+</html>
