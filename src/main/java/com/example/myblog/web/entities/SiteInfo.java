@@ -18,6 +18,10 @@ public class SiteInfo {
     private String cssPath;
     @Column
     private boolean isSliderEnabled;
+    @Column
+    private boolean isSearchMenuEnabled;
+    @Column
+    private  boolean isCategoriesMenuEnabled;
 
     public SiteInfo() {
     }
@@ -68,5 +72,21 @@ public class SiteInfo {
 
     public void setSliderEnabled(boolean sliderEnabled) {
         isSliderEnabled = sliderEnabled;
+    }
+
+    public boolean isSearchMenuEnabled() {
+        return isSearchMenuEnabled;
+    }
+
+    public void setSearchMenuEnabled(boolean searchMenuEnabled) {
+        isSearchMenuEnabled = searchMenuEnabled;
+    }
+
+    public boolean isCategoriesMenuEnabled() {
+        return isCategoriesMenuEnabled;
+    }
+
+    public void setCategoriesMenuEnabled(boolean categoriesMenuEnabled) {
+        isCategoriesMenuEnabled = categoriesMenuEnabled;
     }
 }

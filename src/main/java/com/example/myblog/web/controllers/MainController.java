@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -19,6 +20,7 @@ public class MainController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model){
         mainService.loadSiteSettings();
+        mainService.loadBlogPosts(model);
         mainService.getSiteInfo(model);
         return "home";
     }
@@ -38,5 +40,12 @@ public class MainController {
         } else {
             return "login";
         }
+    }
+
+    @RequestMapping(value = "/read-post", method = RequestMethod.GET)
+    public String readPostPage(Model model, @RequestParam("id") long id){
+        mainService.getSiteInfo(model);
+        mainService.loadPostPage(model, id);
+        return "read-post";
     }
 }

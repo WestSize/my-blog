@@ -1,0 +1,50 @@
+<th:block th:fragment>
+    <!-- edit system start -->
+<!--    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#exampleModal">-->
+    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
+            th:attr="data-target='#modal'+${pic.id }">
+        Редактирай
+    </button>
+    <div class="modal fade" th:id="'modal'+${pic.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Редактирай слайда</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/sliderUpdate" method="post">
+                    <input type="text" style="display: none" readonly th:value="${pic.id}" name="picId"
+                           id="picId"/>
+                <div class="modal-body">
+                    <!-- slide edit menu start -->
+                        <div class="form-check-inline">
+                            <h6>Заглавие към картинката</h6>
+                        </div>
+                        <div class="form-check-inline">
+                            <input style="display: block; width: 450px;" type="text" class="form-control"
+                                   id="title"
+                                   name="title" th:value="${pic.title}" required>
+                        </div>
+                        <p>
+                        <div class="form-check-inline">
+                            <h6>Текст към картинката</h6>
+                        </div>
+                        <div class="form-check-inline">
+                            <input style="display: block; width: 450px;" type="text" class="form-control"
+                                   id="photoText"
+                                   name="photoText" th:value="${pic.photoText}" required>
+                        </div>
+                    <!-- slide edit menu end -->
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Направи промените</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- edit system end -->
+</th:block>

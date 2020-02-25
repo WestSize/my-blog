@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <th:block th:include="~{fragments/head}"/>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <title>Администрация - публикации в категорията • Your blog name! (WsBlog2.0)</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <th:block th:include="~{fragments/header-navi}"/>
+</header>
+<!-- header end -->
+<div id="content">
+
+    <!-- admin panel content start -->
+
+    <!-- admin panel navi start -->
+    <th:block th:include="~{fragments/admin-panel-navi}"/>
+    <!-- admin panel navi end -->
+
+    <div class="content-container">
+
+        <div class="container-fluid">
+
+            <!-- category posts start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <div th:if="${param.postOk}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Публикацията беше публикувана в блога Ви.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
+                        $("#alertPopup").slideUp(500);
+                    });
+                </script>
+                <h1>Публикации в категория '<span style="color: #00B318;" th:text="${categoryInfo.name}"></span>' </h1>
+                <!-- table with posts start -->
+                <p>
+                    <div th:switch="${categoryPosts.size()}">
+                    <span th:case="'0'">Все още няма публикации в тази категория.</span>
+                    <span th:case="*">
+                                                <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Име на публикация</th>
+                                <th scope="col">Опция</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="post : ${categoryPosts}">
+                                <td th:text="${post.title}">Otto</td>
+                                <td>
+                                    <a th:href="@{/read-post(id=${post.id})}" class="btn btn-success btn-sm">Преглед</a>
+                                    <th:block th:include="~{fragments/edit-post-fragm}"/>
+                                    <a th:href="@{/removePost(postId=${post.id})}" class="btn btn-danger btn-sm">Премахни</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                    </div>
+                </p>
+                <!-- table with posts end-->
+            </div>
+            <!-- category posts end -->
+
+        </div>
+    </div>
+    <!-- admin panel content end -->
+
+</div>
+</body>
+</html>

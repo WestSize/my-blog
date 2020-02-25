@@ -9,15 +9,6 @@
                 <p>
                 <p>
                     <!-- Blog Post -->
-                    <div th:switch="${allPosts.size()}">
-                    <span th:case="'0'">
-                        <div class="alert alert-secondary" role="alert">
-                            <i class="fa fa-info-circle" aria-hidden="true"></i> Все още няма налични публикации в блога!
-                        </div>
-                    </span>
-                        <span th:case="*">
-                    <div th:each="post : ${allPosts}">
-                    <span th:if="${post.getText().length() <= 80}">
                     <div class="card mb-4">
                         <img class="card-img-top" th:src="${post.getPhotoPath()}" alt="Post image" width="750px"
                              height="300">
@@ -30,37 +21,6 @@
                 <a href="/about"><span th:text="${blogAuthor}"></span></a>
             </div>
         </div>
-        </span>
-        <span th:unless="${post.getText().length() <= 80}">
-                                            <div class="card mb-4">
-                        <img class="card-img-top" th:src="${post.getPhotoPath()}" alt="Post image" width="750px"
-                             height="300">
-                        <div class="card-body">
-                            <h2 class="card-title"><span th:text="${post.getTitle()}"></span></h2>
-                            <p class="card-text"><span th:text="${post.getText()}"></span></p>
-                            <a th:href="@{/read-post(id=${post.id})}" class="btn btn-primary">Прочети още &rarr;</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Публикувано на <span th:text="${post.getDateAndTime()}"></span> от
-                            <a href="/about"><span th:text="${blogAuthor}"></span></a>
-                        </div>
-                    </div>
-                    </span>
-    </div>
-    </span>
-    </div>
-
-    <!-- Pagination -->
-    <div th:if="${allPosts.size()} > 3">
-        <ul class="pagination justify-content-center mb-4">
-            <li class="page-item">
-                <a class="page-link" href="#">&larr; Older</a>
-            </li>
-            <li class="page-item disabled">
-                <a class="page-link" href="#">Newer &rarr;</a>
-            </li>
-        </ul>
-    </div>
 
     </div>
 

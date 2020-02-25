@@ -1,0 +1,52 @@
+<th: block th:fragment>
+    <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Нова публикация</button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Нова публикация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/newPost" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title" class="col-form-label-lg">Заглавие:</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-form-label-lg">Категория:</label>
+                            <select class="mdb-select md-form" name="category" id="category" required>
+                                <option value="" disabled selected>Избери категория</option>
+                                <div th:each="category : ${allCategories}">
+                                    <option th:value="${category.id}"><span th:text="${category.name}"></span></option>
+                                </div>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-form-label-lg">Публикация:</label>
+                            <textarea class="form-control" id="text" name="text" rows="12" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label-lg">Изображение:</label>
+                            <input type="file" class="form-control" required name="files" id="files"
+                                   accept=".png,.jpg"/>
+                            <p>
+                            <span style="color: #DC3545">
+                            <small>* ВАЖНО: Форматът на изображението трябва да бъде
+                                (<u>.png</u>) или (<u>.jpg</u>)! Препоръчва се то да бъде с размери
+                                <b>750x300</b>.
+                            </small>
+                            </span>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Затвори</button>
+                    <button type="submit" class="btn btn-primary">Публикувай</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</th:>

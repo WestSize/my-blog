@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head>
+    <th:block th:include="~{fragments/head}"/>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <title>Администрация - публикации и категории • Your blog name! (WsBlog2.0)</title>
+</head>
+<body>
+<!-- header start -->
+<header>
+    <th:block th:include="~{fragments/header-navi}"/>
+</header>
+<!-- header end -->
+<div id="content">
+
+    <!-- admin panel content start -->
+
+    <!-- admin panel navi start -->
+    <th:block th:include="~{fragments/admin-panel-navi}"/>
+    <!-- admin panel navi end -->
+
+    <div class="content-container">
+
+        <div class="container-fluid">
+
+            <!-- Информационен панел start -->
+            <div class="jumbotron" style="border: solid #000 1px; background-color: #d8ff7d!important;">
+                <h1>Публикации и категории</h1>
+                <p>От тук можете да добавяте, редактирате и изтривате вашите категории и публикациите към тях.
+                </p>
+                <p>
+                    <a class="btn btn-lg btn-outline-dark" href="/" role="button">Към блога &raquo;</a>
+                </p>
+            </div>
+            <!-- Информационен панел end-->
+
+            <!-- posts settings start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <div th:if="${param.postOk}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Публикацията беше публикувана в блога Ви.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.postEdited}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Публикацията беше редактирана.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.postDeleted}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Публикацията беше изтрита.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.allPostsDeleted}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Всички публикации бяха изтрити.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
+                        $("#alertPopup").slideUp(500);
+                    });
+                </script>
+                <h1>Настройки на публикациите</h1>
+                <br>
+                <p>
+                    <!--                    <th:block th:include="~{fragments/new-post-fragm}"/>-->
+                <div class="form-group mx-sm-3 mb-2">
+                    <th:block th:include="~{fragments/new-post-fragm}"/>
+                    <span th:if="${allPosts.size()}>0">
+                    <a href="/deleteAllPosts" class="btn btn-lg btn-danger">Изтрий всички публикации</a>
+                    </span>
+                </div>
+                </p>
+                <br>
+                <!-- table with posts start -->
+                <p>
+                <div th:switch="${allPosts.size()}">
+                <span th:case="'0'"><h6>Няма налични публикации!</h6></span>
+                    <span th:case="*">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Име на публикацията</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Категория</th>
+                                <th scope="col">Опции</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="post : ${allPosts}">
+                                <td th:text="${post.getTitle()}"></td>
+                                <td th:text="${post.getDateAndTime()}"></td>
+                                <td th:text="${post.getCategory().getName()}"></td>
+                                <td>
+                                    <th:block th:include="~{fragments/edit-post-fragm}"/>
+<!--                                    <button class="btn btn-danger btn-sm">Премахни</button>-->
+                                    <a th:href="@{/removePost(postId=${post.id})}" class="btn btn-danger btn-sm">Премахни</a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </span>
+                </div>
+                </p>
+                <!-- table with posts end-->
+            </div>
+            <!-- posts settings end -->
+
+            <!-- categories settings start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <div th:if="${param.categoryCreated}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Категорията беше създадена.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
+                        $("#alertPopup").slideUp(500);
+                    });
+                </script>
+                <h1>Настройки на категориите</h1>
+                <br>
+                <p>
+                <div class="form-group mx-sm-3 mb-2">
+                    <th:block th:include="~{fragments/new-category-fragm}"/>
+                </div>
+                </p>
+                <br>
+                <!-- table with posts start -->
+                <p>
+                <div th:switch="${allCategories.size()}">
+                <span th:case="'0'"><h6>Няма налични категории!</h6></span>
+                <span th:case="*">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Име на категорията</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col">Брой статии</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category : ${allCategories}">
+                            <td th:text="${category.name}"></td>
+                            <td th:text="${category.description}"></td>
+                            <td><a th:href="@{/admin-category-posts(id=${category.id})}"><span th:text="${category.postsNum}"></span></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </span>
+                </div>
+                </p>
+                <!-- table with posts end-->
+            </div>
+            <!-- categories settings end -->
+
+        </div>
+    </div>
+    <!-- admin panel content end -->
+
+</div>
+</body>
+</html>

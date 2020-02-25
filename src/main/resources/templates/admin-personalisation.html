@@ -42,12 +42,29 @@
                     <div class="bs-example">
                         <!-- Success Alert -->
                         <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
-                            <strong>Успешно!</strong> Настройките на слайдоу панела бяха променени.
+                            <strong>Успешно!</strong> Настройките на слайдшоу панела бяха променени.
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                         </div>
                     </div>
                 </div>
-
+                <div th:if="${param.sliderUploaded}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Картинката беше добавена.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${param.sliderDeleted}">
+                    <div class="bs-example">
+                        <!-- Success Alert -->
+                        <div class="alert alert-success alert-dismissible fade show" id="alertPopup">
+                            <strong>Успешно!</strong> Картинката беше изтрита.
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        </div>
+                    </div>
+                </div>
                 <script>
                     $("#alertPopup").fadeTo(4000, 500).slideUp(500, function () {
                         $("#alertPopup").slideUp(500);
@@ -111,10 +128,57 @@
                         <hr>
                             <h5>Персонализация:</h5>
                             <th:block th:include="~{fragments/slider}"/>
+                        <hr>
+                        <!-- slider upload -->
+                        <h5>Добавяне на нов слайд</h5>
+                        <p>
+                             <form action="/sliderUpload" method="post" enctype="multipart/form-data">
+                                <div class="form-check-inline">
+                                    <h6> <span style="color: #28a745">-</span> Заглавие към картинката</h6>
+                                </div>
+                                <div class="form-check-inline">
+                                          <input style="display: block; width: 450px;" type="text" class="form-control"
+                                                 id="title"
+                                                 name="title" required>
+                                </div>
+                                 <p>
+                                 <div class="form-check-inline">
+                                    <h6> <span style="color: #28a745">-</span> Текст към картинката</h6>
+                                </div>
+                                <div class="form-check-inline">
+                                          <input style="display: block; width: 450px;" type="text" class="form-control"
+                                                 id="photoText"
+                                                 name="photoText" required>
+                                </div>
+                                <p>
+                                    <div class="form-check-inline">
+                                          <input type="file" class="form-control" required name="files" id="files"
+                                                 accept=".png,.jpg"/>
+                                    </div>
+                                    <button class="btn btn-sm btn-success">Изпрати</button>
+                                 <p>
+                                    <h6>
+                                        <small>* ВАЖНО: Форматът на изпратената картинка трябва да бъде
+                                            (<u>.png</u>) или (<u>.jpg</u>)
+                                        </small>
+                                    </h6>
+                        </form>
+                        <br>
+                        <!-- slider options -->
+                        <th:block th:include="~{fragments/slider-options-fragm}"/>
+                        <div class="alert alert-warning" role="alert">
+                            <b>ВАЖНО:</b> Винаги трябва да има най-малко 2 активни слайда!
+                        </div>
                     </span>
                 </div>
             </div>
             <!--            Slider settings end-->
+            <!-- left menu settings start -->
+            <div class="jumbotron" style="border: solid #000 1px;">
+                <h1>Настройки на менютата</h1>
+                <hr>
+            </div>
+            <!-- left menu settings end -->
 
         </div>
     </div>

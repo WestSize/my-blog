@@ -1,0 +1,35 @@
+<th:block th:fragment>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Картинка</th>
+            <th scope="col">Заглавие</th>
+            <th scope="col">Текст</th>
+            <th scope="col">Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pic : ${sliderPics}">
+            <td class="img-hover">
+                <img th:src="${pic.getPhotoPath()}" width="40px" data-toggle="modal" data-target="#exampleModalLong"
+                     class="img-thumbnail"/>
+            </td>
+            <td th:text="${pic.title}"></td>
+            <td th:text="${pic.photoText}"></td>
+            <td>
+                <div th:switch="${sliderPicsSize}">
+                    <span th:case="'2'">
+                        <button class="btn btn-outline-danger btn-sm" id="alertbox" disabled>Премахни</button>
+                        <th:block th:include="~{fragments/edit-slide-fragm}"/>
+                        </span>
+                    <span th:case="*">
+                        <a th:href="@{/removeSlider(picId=${pic.id})}" class="btn btn-outline-danger btn-sm">Премахни</a>
+                        <th:block th:include="~{fragments/edit-slide-fragm}"/>
+                        </span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</th:block>
